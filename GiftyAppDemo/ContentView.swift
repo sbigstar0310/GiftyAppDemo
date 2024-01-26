@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+  @StateObject private var dataModel = DataModel()
+  @StateObject private var FBDataModel = FirebaseDataModel()
+  
+  var body: some View {
+    TabView {
+      HomeView()
+        .tabItem {
+          Label("홈", systemImage: "house")
         }
-        .padding()
+        .environmentObject(FBDataModel)
+        .environmentObject(dataModel)
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }
